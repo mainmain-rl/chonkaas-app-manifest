@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  chonkaas-py
+  namespace: chonkass
+  labels:
+    app:  chonkaas-py
+    env: prod
+    version: "1"
+spec:
+  selector:
+    matchLabels:
+      app: chonkaas-py
+      env: prod
+      version: "1"
+  replicas: 10
+  template:
+    metadata:
+      labels:
+        app: chonkaas-py
+        env: prod
+        version: "1"
+    spec:
+      containers:
+      - name:  chonkaas-py
+        image:  mainmainrl/chonkass-app-py:latest
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort:  5000
+          name:  chonkaas-py
+      restartPolicy: Always

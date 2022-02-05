@@ -1,0 +1,65 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: chonkass-py-http
+  namespace: chonkass
+spec:
+  entryPoints:
+    - http
+  routes:
+  - match: Host(`*`)
+    kind: Rule
+    middlewares:
+      - name: mw-ratelimit
+        namespace: traefik
+      - name: mw-error-page
+        namespace: traefik
+    services:
+    - kind: Service
+      name: chonkaas-svc
+      namespace: chonkass
+      port: 5000
+      passHostHeader: true
+      strategy: RoundRobin
+      weight: 95
+    - kind: Service
+      name: chonkaas-svc-2
+      namespace: chonkass
+      port: 5000
+      passHostHeader: true
+      strategy: RoundRobin
+      weight: 5
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: chonkass-py-https
+  namespace: chonkass
+spec:
+  entryPoints:
+    - https
+  routes:
+  - match: Host(`*`)
+    kind: Rule
+    middlewares:
+      - name: mw-ratelimit
+        namespace: traefik
+      - name: mw-error-page
+        namespace: traefik
+    services:
+        - kind: Service
+          name: chonkaas-svc
+          namespace: chonkass
+          passHostHeader: true
+          port: 5000
+          strategy: RoundRobin
+          weight: 95
+        - kind: Service
+          name: chonkaas-svc-2
+          namespace: chonkass
+          passHostHeader: true
+          port: 5000
+          strategy: RoundRobin
+          weight: 5
+  tls:
+    certResolver: default
