@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-chonkass-app-py
-  namespace: chonkass
+  namespace: chonkaas-app-py
 spec:
   selector:
     app: chonkaas-app-py
