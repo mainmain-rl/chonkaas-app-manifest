@@ -16,7 +16,7 @@ spec:
         namespace: traefik
     services:
     - kind: Service
-      name: svc-chonkaas-app-py
+      name: svc
       namespace: chonkaas-app-py
       port: 5000
       passHostHeader: true
@@ -40,7 +40,7 @@ spec:
         namespace: traefik
     services:
         - kind: Service
-          name: svc-chonkaas-app-py
+          name: svc
           namespace: chonkaas-app-py
           passHostHeader: true
           port: 5000
