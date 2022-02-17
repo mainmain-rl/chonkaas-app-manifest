@@ -13,7 +13,7 @@ spec:
       app: chonkaas-app-py
       env: prod
       version: "0.1"
-  replicas: 10
+  replicas: 2
   template:
     metadata:
       labels:
@@ -38,7 +38,7 @@ spec:
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
-          periodSeconds: 10
+          periodSeconds: 1
         readinessProbe:
           httpGet:
             path: /health
