@@ -15,7 +15,14 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: chonkaas-svc-2
+            name: svc-chonkaas-app-py
+            port:
+              number: 5000
+      - path: /chonk
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-chonkaas-app-py
             port:
               number: 5000
 
@@ -37,6 +44,13 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: chonkaas-svc-2
+            name: svc-chonkaas-app-py
+            port:
+              number: 5000
+      - path: /chonk
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-chonkaas-app-py
             port:
               number: 5000

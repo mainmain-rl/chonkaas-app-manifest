@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: chonkaas-svc
+  name: svc-chonkass-app-py
   namespace: chonkass
 spec:
   selector:
-    app: chonkaas-py
+    app: chonkaas-app-py
     env: prod
-    version: "1"
+    version: "0.1"
   type: ClusterIP
   sessionAffinity: None
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800
   ports:
-  - name: chonkaas-py
+  - name: chonkaas-app-py
     protocol: TCP
     port: 5000
     targetPort: 5000
