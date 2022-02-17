@@ -47,7 +47,7 @@ spec:
           timeoutSeconds: 2
           successThreshold: 1
           failureThreshold: 3
-          periodSeconds: 10
+          periodSeconds: 1
         ports:
         - containerPort:  5000
           name:  chonkaas-app-py
